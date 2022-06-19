@@ -1,0 +1,48 @@
+<!-- shout/templates/dashboard.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="column">
+    {% for followed in shout %}
+            <div class="box">
+                {{ followed.body }}
+                <span class="is-small has-text-grey-light">
+                    ({{ followed.created_at }} by <font color="#15438c">{{ followed.user.username }} </font>)
+                </span>
+            </div>
+    {% endfor %}
+</div>
+
+<div class="column is-one-third">
+    <div class="block">
+        <a href="{% url 'shout:profile_list' %} ">
+            <button class="button is-dark is-outlined is-fullwidth">
+                All Profiles
+            </button>
+        </a>
+    </div>
+    <div class="block">
+        <a href="{% url 'shout:profile' request.user.profile.id %} ">
+            <button class="button is-success is-light is-outlined is-fullwidth">
+                My Profile
+            </button>
+        </a>
+    </div>
+        <div class="block">
+        <h2 class="title is-2">Shout what you feel!</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button is-success is-fullwidth is-medium mt-5"
+                type="submit">Shout!
+        </button>
+    </form>
+</div>
+
+
+
+
+{% endblock content %}
