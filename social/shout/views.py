@@ -15,11 +15,11 @@ def dashboard(request):
             return redirect("shout:dashboard")
 
     followed_shouts = shout.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by("-created_at")
-    return render(request, "dashboard.html", {"form": form, "shout": followed_shouts})
+    return render(request, "shout/dashboard.html", {"form": form, "shout": followed_shouts})
 
 def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)
-    return render(request, "profile_list.html", {"profiles": profiles})
+    return render(request, "shout/profile_list.html", {"profiles": profiles})
 
 def profile(request, pk):
 
@@ -39,4 +39,4 @@ def profile(request, pk):
             current_user_profile.follows.remove(profile)
         current_user_profile.save()
 
-    return render(request, "profile.html", {"profile": profile})
+    return render(request, "shout/profile.html", {"profile": profile})
