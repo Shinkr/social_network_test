@@ -5,6 +5,6 @@ from .models import Project
 # Register your models here.
 class ProjectAdmin(admin.ModelAdmin):
     model = Project
-    fields = ['title', 'description', 'technology']
+    fields = ['title', 'description', 'technology', 'link']
 
 admin.site.register(Project, ProjectAdmin)
